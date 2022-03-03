@@ -29,6 +29,8 @@ mkdir -p /etc/openvpn/client
 cp commonConfig   /etc/openvpn
 cp startbond.sh /etc/openvpn
 cp stopbond.sh  /etc/openvpn
+cp starttunnel.sh /etc/openvpn
+cp stoptunnel.sh /etc/openvpn
 
 for counter in `seq 1 $numberOfTunnels`;
 do
