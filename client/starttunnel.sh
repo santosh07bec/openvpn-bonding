@@ -68,7 +68,7 @@ sudo ip rule add pref 10 from $tunnelInterfaceIP table "vpn$interface_number"
 sudo ip route add default via $tunnelInterfaceGW dev ${!tunnelInterface} table "vpn$interface_number"
 
 # Start OpenVPN client process
-if sudo openvpn --daemon --config $configFileName; then
+if sudo openvpn --allow-recursive-routing --daemon --config $configFileName; then
   echo "Started OpenVPN Client for interface $interface"
 else
   echo "Failed to start OpenVPN Client for interface $interface"
