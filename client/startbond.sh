@@ -88,7 +88,7 @@ do
 
     # start openvpn as a daemon
 
-    openvpn --daemon --config $configFileName
+    openvpn --allow-recursive-routing --daemon --config $configFileName
 
 done
 echo "###########################################"
