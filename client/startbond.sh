@@ -9,6 +9,13 @@
 #
 # #############################################
 
+# Check if running as root
+if [[ $(/usr/bin/whoami) != 'root' ]]; then
+  echo "Please execute the script as root."
+  echo "Aboarting execution..."
+  exit 0
+fi
+
 # include the common settings
 . /etc/openvpn/commonConfig
 
@@ -47,7 +54,8 @@ do
     tunnelInterface="tunnelInterface$i"
     configFileName="/etc/openvpn/client/client${i}.conf"
     
-    # Remove any WAN interface masquerading
+    # Remove any WAN interface masquerading. This is only needed to
+    # access Internet from Home Lan network when OpenVPN tunnels are not active
     iptables -t nat -D POSTROUTING -o ${!tunnelInterface} -j MASQUERADE
 
     echo "###########################################"
@@ -92,9 +100,6 @@ do
     # start openvpn as a daemon
 
     openvpn --allow-recursive-routing --daemon --config $configFileName
-    
-    # Add masquerading to WAN Interfaces to access Internet from Home LAN network
-    iptables -t nat -A POSTROUTING -o ${!tunnelInterface} -j MASQUERADE
 
 done
 echo "###########################################"
@@ -113,4 +118,3 @@ for i in $(seq $default_gateway_count); do ip route del default; done
 # add new default route through bond interface
 
 ip route add default via $remoteBondIP
-
