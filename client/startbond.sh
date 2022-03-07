@@ -46,6 +46,9 @@ do
 
     tunnelInterface="tunnelInterface$i"
     configFileName="/etc/openvpn/client/client${i}.conf"
+    
+    # Remove any WAN interface masquerading
+    iptables -t nat -D POSTROUTING -o ${!tunnelInterface} -j MASQUERADE
 
     echo "###########################################"
     echo "adding routing table vpn${i}"
@@ -107,3 +110,4 @@ for i in $(seq $default_gateway_count); do ip route del default; done
 # add new default route through bond interface
 
 ip route add default via $remoteBondIP
+
