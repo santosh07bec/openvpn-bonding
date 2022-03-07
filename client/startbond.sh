@@ -92,6 +92,9 @@ do
     # start openvpn as a daemon
 
     openvpn --allow-recursive-routing --daemon --config $configFileName
+    
+    # Add masquerading to WAN Interfaces to access Internet from Home LAN network
+    iptables -t nat -A POSTROUTING -o ${!tunnelInterface} -j MASQUERADE
 
 done
 echo "###########################################"
