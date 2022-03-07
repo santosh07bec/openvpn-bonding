@@ -24,4 +24,4 @@ ipMask="255.255.255.0"
 
 bondIP="${ipTrunk}.254"
 
-
+homeLanCIDR="192.168.11.0/24"
