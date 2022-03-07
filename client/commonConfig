@@ -5,9 +5,9 @@
 
 numberOfTunnels=2
 
-tunnelInterface1=wlan0
-tunnelInterface2=eth0
-tunnelInterface3=eth1
+tunnelInterface1=eth1
+tunnelInterface2=usb0
+tunnelInterface3=wlan0
 tunnelInterface4=wlan1
 
 # the bondingMode decides how the load is spread over the interfaces
