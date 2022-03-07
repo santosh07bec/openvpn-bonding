@@ -10,6 +10,12 @@
 #
 # #############################################
 
+if [[ $(/usr/bin/whoami) != 'root' ]]; then
+  echo "Please execute the script as root."
+  echo "Aboarting execution..."
+  exit 0
+fi
+
 # include the common settings
 . /etc/openvpn/commonConfig
 
