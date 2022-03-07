@@ -87,3 +87,5 @@ ip link set "$bondInterface" up
 # assign it the bondIP
 
 ip addr add ${bondIP}/24 dev $bondInterface
+
+ip route add $homeLanCIDR via ${ipTrunk}.253
